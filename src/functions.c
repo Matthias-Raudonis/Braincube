@@ -33,7 +33,8 @@ SOFTWARE.
 extern uint8_t cube[6][9];
 extern uint8_t pointer;
 
-enum {
+enum
+{
     incP,
     decP,
     incV,
@@ -41,42 +42,92 @@ enum {
     oput,
     iput,
     negL,
+
+    L_Front,    // mixing N and L necessary because of +1
+    N_Front,
+    L_Back,
+    N_Back,
+    L_Up,
+    N_Up,
+    L_Down,
+    N_Down,
+    L_Right,
+    N_Right,
+    L_Left,
+    N_Left,
+
     JmpF,
     JmpB,
-    L_Front,
-    L_Back,
-    L_Up,
-    L_Down,
-    L_Right,
-    L_Left,
 };
 
 bool compile(uint8_t *program, char *text)
 {
     uint32_t c=0;    // instruction counter
-
+    bool negflag = false;
     while(*text)
     {
         switch(*text)
         {
         case '+':
             program[c++]=incV;
+            negflag=0;
             break;
         case '-':
             program[c++]=decV;
+            negflag=0;
             break;
         case '>':
             program[c++]=incP;
+            negflag=0;
             break;
         case '<':
             program[c++]=decP;
+            negflag=0;
             break;
+        case '.':
+            program[c++]=oput;
+            negflag=0;
+            break;
+        case ',':
+            program[c++]=iput;
+            negflag=0;
+            break;
+        case '|':
+            negflag=1;
+            break;
+        case 'F':
+            program[c++]=L_Front+negflag;
+            negflag=0;
+            break;
+        case 'B':
+            program[c++]=L_Back+negflag;
+            negflag=0;
+            break;
+        case 'U':
+            program[c++]=L_Up+negflag;
+            negflag=0;
+            break;
+        case 'D':
+            program[c++]=L_Down+negflag;
+            negflag=0;
+            break;
+        case 'R':
+            program[c++]=L_Right+negflag;
+            negflag=0;
+            break;
+        case 'L':
+            program[c++]=L_Left+negflag;
+            negflag=0;
+            break;
+
+
 
         default:
             break;
 
 
         }
+        *(text++);
     }
 }
 
