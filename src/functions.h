@@ -30,8 +30,7 @@ SOFTWARE.
 #define FUNCTIONS_H
 
 void displayCube();
-
-
+uint8_t compile(uint8_t* program, char *text);
 
 
 #endif

@@ -36,8 +36,9 @@ SOFTWARE.
 
 
 #define uint8_t char
-
+#define uint32_t int
 #define bool char
+
 #define true 1
 #define false 0
 // GUI Config

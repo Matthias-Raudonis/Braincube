@@ -32,27 +32,52 @@ SOFTWARE.
 
 extern uint8_t cube[6][9];
 extern uint8_t pointer;
-enum ins {
-incP,
-decP,
-incV,
-decV,
-oput,
-iput,
-negL,
-JmpF,
-JmpB,
-L_Front,
-L_Back,
-L_Up,
-L_Down,
-L_Right,
-L_Left,
+
+enum {
+    incP,
+    decP,
+    incV,
+    decV,
+    oput,
+    iput,
+    negL,
+    JmpF,
+    JmpB,
+    L_Front,
+    L_Back,
+    L_Up,
+    L_Down,
+    L_Right,
+    L_Left,
 };
 
-bool compile(char *text)
+bool compile(uint8_t *program, char *text)
 {
+    uint32_t c=0;    // instruction counter
 
+    while(*text)
+    {
+        switch(*text)
+        {
+        case '+':
+            program[c++]=incV;
+            break;
+        case '-':
+            program[c++]=decV;
+            break;
+        case '>':
+            program[c++]=incP;
+            break;
+        case '<':
+            program[c++]=decP;
+            break;
+
+        default:
+            break;
+
+
+        }
+    }
 }
 
 
@@ -98,7 +123,8 @@ void displayCube()
 
 
     for(int j=1; j<=9; j+=3)
-    {   buf=buf_beg;
+    {
+        buf=buf_beg;
         for(int i=2; i<=5; i++)
         {
             buf+=sprintf(buf,"| %i %i %i ",cube[i][j],cube[i][j+1],cube[i][j+2]);
@@ -107,12 +133,12 @@ void displayCube()
         printf("%s",buffer);
     }
 
-        buf=buf_beg;
+    buf=buf_beg;
     buf+=sprintf(buf,"x - - - x-------x - - - x - - - x");
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
-        buf=buf_beg;
+    buf=buf_beg;
     buf+=sprintf(buf,"        | %i %i %i |",cube[6][1],cube[6][2],cube[6][3]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
