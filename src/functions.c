@@ -26,9 +26,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
+#include <stdio.h>
+#include "config.h"
 
+extern uint8_t cube[6][9];
 
-void displayCube(){
+void displayCube()
+{
 // surface:
 // 123
 // 456
@@ -37,12 +41,69 @@ void displayCube(){
 //  1
 // 2345
 //  6
-char buffer [100];
-char* buf =buffer
+    char buffer [100];
+    char* buf = buffer;
+    for (int i=0; i<GUI_fspaces; i++) buf+=sprintf(buf," ");
+    char* buf_beg = buf;
 
-buf+=sprintf(buf,"    ");
-buf+=sprintf(buf,"x---x");
-buf+=sprintf(buf,"\n");
-printf("%s",buf)
 
+    buf+=sprintf(buf,"        x - - - x");
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"        | %i %i %i |",cube[1][1],cube[1][2],cube[1][3]);
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"        | %i %i %i |",cube[1][4],cube[1][5],cube[1][6]);
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"        | %i %i %i |",cube[1][7],cube[1][8],cube[1][9]);
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"x - - - x-------x - - - x - - - x");
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+
+    for(int j=1; j<=9; j+=3)
+    {   buf=buf_beg;
+        for(int i=2; i<=5; i++)
+        {
+            buf+=sprintf(buf,"| %i %i %i ",cube[i][j],cube[i][j+1],cube[i][j+2]);
+        }
+        buf+=sprintf(buf,"|\n");
+        printf("%s",buffer);
+    }
+
+        buf=buf_beg;
+    buf+=sprintf(buf,"x - - - x-------x - - - x - - - x");
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+        buf=buf_beg;
+    buf+=sprintf(buf,"        | %i %i %i |",cube[6][1],cube[6][2],cube[6][3]);
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"        | %i %i %i |",cube[6][4],cube[6][5],cube[6][6]);
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"        | %i %i %i |",cube[6][7],cube[6][8],cube[6][9]);
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
+
+    buf=buf_beg;
+    buf+=sprintf(buf,"        x - - - x");
+    buf+=sprintf(buf,"\n");
+    printf("%s",buffer);
 }

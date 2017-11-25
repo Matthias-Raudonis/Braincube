@@ -41,7 +41,7 @@ SOFTWARE.
 #define true 1
 #define false 0
 // GUI Config
-
+#define GUI_fspaces 5
 
 // code
 #endif

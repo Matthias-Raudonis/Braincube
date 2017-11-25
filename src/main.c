@@ -33,8 +33,16 @@ SOFTWARE.
 
 uint8_t cube[6][9];
 
-int main() {
-	printf("Braincube\n");
-	displayCube();
-	return 0;
+int main()
+{
+    printf("Braincube\n");
+    for(int i=1; i<=6; i++)
+    {
+        for(int j=1; j<=9; j++)
+        {
+            cube[i][j]=j;
+        }
+    }
+    displayCube();
+    return 0;
 }
