@@ -28,5 +28,10 @@ SOFTWARE.
 */
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
-// code
+
+void displayCube();
+
+
+
+
 #endif

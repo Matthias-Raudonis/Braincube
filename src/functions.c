@@ -26,3 +26,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
+
+
+void displayCube(){
+// surface:
+// 123
+// 456
+// 789
+//CUBE Orientation
+//  1
+// 2345
+//  6
+char buffer [100];
+char* buf =buffer
+
+buf+=sprintf(buf,"    ");
+buf+=sprintf(buf,"x---x");
+buf+=sprintf(buf,"\n");
+printf("%s",buf)
+
+}

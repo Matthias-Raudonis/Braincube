@@ -27,9 +27,14 @@ SOFTWARE.
 
 */
 
-#include<stdio.h>
+#include <stdio.h>
+#include "config.h"
+#include "functions.h"
+
+uint8_t cube[6][9];
 
 int main() {
 	printf("Braincube\n");
+	displayCube();
 	return 0;
 }

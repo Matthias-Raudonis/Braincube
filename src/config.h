@@ -29,8 +29,19 @@ SOFTWARE.
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define SIMULATOR //
-#define ALL_STEPS //
+#define SIMULATOR // If not defined, only IO
+#define ALL_STEPS // Shows all steps
+
+
+
+
+#define uint8_t char
+
+#define bool char
+#define true 1
+#define false 0
+// GUI Config
+
 
 // code
 #endif
