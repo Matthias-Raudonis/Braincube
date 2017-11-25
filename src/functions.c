@@ -28,8 +28,33 @@ SOFTWARE.
 */
 #include <stdio.h>
 #include "config.h"
+#include "functions.h"
 
 extern uint8_t cube[6][9];
+extern uint8_t pointer;
+enum ins {
+incP,
+decP,
+incV,
+decV,
+oput,
+iput,
+negL,
+JmpF,
+JmpB,
+L_Front,
+L_Back,
+L_Up,
+L_Down,
+L_Right,
+L_Left,
+};
+
+bool compile(char *text)
+{
+
+}
+
 
 void displayCube()
 {

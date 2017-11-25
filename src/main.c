@@ -32,6 +32,7 @@ SOFTWARE.
 #include "functions.h"
 
 uint8_t cube[6][9];
+uint8_t pointer;
 
 int main()
 {
@@ -43,6 +44,7 @@ int main()
             cube[i][j]=j;
         }
     }
+
     displayCube();
     return 0;
 }
