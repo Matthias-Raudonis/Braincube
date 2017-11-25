@@ -3,7 +3,6 @@ Braincube Project:
 New esotheric programming language by Matthias Raudonis,
 Interpreter and Simulator
 
-
 MIT License
 
 Copyright (c) 2017 Matthias-Raudonis
