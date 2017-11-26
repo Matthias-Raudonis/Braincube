@@ -32,5 +32,5 @@ SOFTWARE.
 void displayCube();
 bool compile(char *text);
 bool execute(uint32_t number);
-
+void turn_face(uint8_t face, uint8_t times);
 #endif

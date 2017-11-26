@@ -30,7 +30,7 @@ SOFTWARE.
 #include "config.h"
 #include "functions.h"
 
-extern uint8_t cube[6][9];
+extern uint8_t cube[7][9];
 extern uint8_t pointer;
 
 extern uint32_t c;    // instruction counter
@@ -235,7 +235,7 @@ void displayCube()
 
 bool execute(uint32_t number)
 {
-    uint8_t H;
+
 
     while(number--&&c>=c_p)
     {
@@ -291,32 +291,12 @@ bool execute(uint32_t number)
         case L_Front:
             if(!program[c_p][1])    // if positive
             {
-                H=cube[3][1];
-                  cube[3][1]=cube[3][7];
-                cube[3][7]=cube[3][9];
-                cube[3][9]=cube[3][3];
-                cube[3][3]=H;
-                //cube[3][5]=cube[3][5];
-                H=cube[3][2];
-                cube[3][2]=cube[3][4];
-                cube[3][4]=cube[3][8];
-                cube[3][8]=cube[3][6];
-                cube[3][6]=H;
-
-
-
+                turn_face(3,1);
             }
             else
             {
-                cube[3][1]=cube[3][3];
-                cube[3][2]=cube[3][6];
-                cube[3][3]=cube[3][9];
-                cube[3][4]=cube[3][2];
-                //cube[3][5]=cube[3][5];
-                cube[3][6]=cube[3][8];
-                cube[3][7]=cube[3][1];
-                cube[3][8]=cube[3][4];
-                cube[3][9]=cube[3][7];
+
+                turn_face(3,3);
             }
             break;
         case L_Back:
@@ -337,4 +317,64 @@ bool execute(uint32_t number)
         c_p++;
     }
     return true;
+}
+
+void turn_face(uint8_t face, uint8_t times)
+{
+    uint8_t H;  // help variable for buffering
+    uint8_t Ad=0; // Adjacent face (left side changes)
+    uint8_t Al=0;
+    uint8_t Au=0;
+    uint8_t Ar=0;
+    switch(face)
+    {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        Ad=1;
+        Al=4;
+        Au=6;
+        Ar=2;
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+
+
+    }
+for(int i=0; i<times; i++){
+        //turning actual face
+    H=cube[face][1];
+    cube[face][1]=cube[face][7];
+    cube[face][7]=cube[face][9];
+    cube[face][9]=cube[face][3];
+    cube[face][3]=H;
+    //cube[3][5]=cube[3][5];
+    H=cube[face][2];
+    cube[face][2]=cube[face][4];
+    cube[face][4]=cube[face][8];
+    cube[face][8]=cube[face][6];
+    cube[face][6]=H;
+    // turning round
+    uint8_t H1=cube[Ad][7];
+    uint8_t H2=cube[Ad][8];
+    uint8_t H3=cube[Ad][9];
+    cube[Ad][7]=cube[Ar][9];
+    cube[Ad][8]=cube[Ar][6];
+    cube[Ad][9]=cube[Ar][3];
+    cube[Ar][9]=cube[Au][3];
+    cube[Ar][6]=cube[Au][2];
+    cube[Ar][3]=cube[Au][1];
+    cube[Au][1]=cube[Al][7];
+    cube[Au][2]=cube[Al][4];
+    cube[Au][3]=cube[Al][1];
+    cube[Al][7]=H3;
+    cube[Al][4]=H2;
+    cube[Al][1]=H1;
+    }
 }

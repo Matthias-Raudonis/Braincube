@@ -31,7 +31,7 @@ SOFTWARE.
 #include "config.h"
 #include "functions.h"
 
-uint8_t cube[6][9];
+uint8_t cube[7][9];
 uint8_t pointer;
 uint32_t c; // instruction counter
 uint32_t c_p; // instruction pointer
@@ -57,8 +57,8 @@ int main()
      }
 
 
-    if(true==compile("F")) printf("Compilation success\n");
-    for(int i=1; i<=3; i++)
+    if(true==compile(".F|F")) printf("Compilation success\n");
+    for(int i=0; i<5; i++)
     {
         if(true==execute(1)) printf("\n Execution success\n");
         displayCube();
