@@ -5,7 +5,7 @@ Interpreter and Simulator
 
 MIT License
 
-Copyright (c) 2017 Matthias-Raudonis
+Copyright (c) 2017 Matthias Raudonis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,16 +47,21 @@ int main()
     pointer=1;
 
     printf("Braincube\n");
+    /*
     for(int i=1; i<=6; i++)
-    {
-        for(int j=1; j<=9; j++)
-        {
-            cube[i][j]=j;
-        }
-    }
+     {
+         for(int j=1; j<=9; j++)
+         {
+             cube[i][j]=j;
+         }
+     }
+     */
 
-    if(true==compile("+.+.+.>+.,.<.")) printf("compilation success\n");
-    if(true==execute(1000)) printf("execution success\n");
-    displayCube();
+    if(true==compile("++>>[-]<<[->>+<<]")) printf("Compilation success\n");
+    for(int i=1; i<=30; i++)
+    {
+        if(true==execute(1)) printf("\n Execution success\n");
+        displayCube();
+    }
     return 0;
 }

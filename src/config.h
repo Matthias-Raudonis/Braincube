@@ -5,7 +5,7 @@ Interpreter and Simulator
 
 MIT License
 
-Copyright (c) 2017 Matthias-Raudonis
+Copyright (c) 2017 Matthias Raudonis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,10 +31,12 @@ SOFTWARE.
 
 #define SIMULATOR // If not defined, only IO
 #define ALL_STEPS // Shows all steps
+#define DEBUG_M
 
 #define SIZE_PROG 1024
 #define SIZE_STACK 512
 
+#define MAXNUMBER 15
 
 #define uint8_t unsigned short
 #define uint32_t unsigned int

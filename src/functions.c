@@ -5,7 +5,7 @@ Interpreter and Simulator
 
 MIT License
 
-Copyright (c) 2017 Matthias-Raudonis
+Copyright (c) 2017 Matthias Raudonis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -147,7 +147,7 @@ bool compile(char *text)
         }
         (text++);
     }
-    if(!stackp) return false;
+    if(stackp) return false;
     return true;
 }
 
@@ -169,22 +169,22 @@ void displayCube()
     char* buf_beg = buf;
 
 
-    buf+=sprintf(buf,"        x - - - x");
+    buf+=sprintf(buf,"P:%i(%X)  x - - - x",pointer,cube[3][pointer]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
     buf=buf_beg;
-    buf+=sprintf(buf,"        | %i %i %i |",cube[1][1],cube[1][2],cube[1][3]);
+    buf+=sprintf(buf,"        | %X %X %X |",cube[1][1],cube[1][2],cube[1][3]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
     buf=buf_beg;
-    buf+=sprintf(buf,"        | %i %i %i |",cube[1][4],cube[1][5],cube[1][6]);
+    buf+=sprintf(buf,"        | %X %X %X |",cube[1][4],cube[1][5],cube[1][6]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
     buf=buf_beg;
-    buf+=sprintf(buf,"        | %i %i %i |",cube[1][7],cube[1][8],cube[1][9]);
+    buf+=sprintf(buf,"        | %X %X %X |",cube[1][7],cube[1][8],cube[1][9]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
@@ -199,7 +199,7 @@ void displayCube()
         buf=buf_beg;
         for(int i=2; i<=5; i++)
         {
-            buf+=sprintf(buf,"| %i %i %i ",cube[i][j],cube[i][j+1],cube[i][j+2]);
+            buf+=sprintf(buf,"| %X %X %X ",cube[i][j],cube[i][j+1],cube[i][j+2]);
         }
         buf+=sprintf(buf,"|\n");
         printf("%s",buffer);
@@ -211,17 +211,17 @@ void displayCube()
     printf("%s",buffer);
 
     buf=buf_beg;
-    buf+=sprintf(buf,"        | %i %i %i |",cube[6][1],cube[6][2],cube[6][3]);
+    buf+=sprintf(buf,"        | %X %X %X |",cube[6][1],cube[6][2],cube[6][3]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
     buf=buf_beg;
-    buf+=sprintf(buf,"        | %i %i %i |",cube[6][4],cube[6][5],cube[6][6]);
+    buf+=sprintf(buf,"        | %X %X %X |",cube[6][4],cube[6][5],cube[6][6]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
     buf=buf_beg;
-    buf+=sprintf(buf,"        | %i %i %i |",cube[6][7],cube[6][8],cube[6][9]);
+    buf+=sprintf(buf,"        | %X %X %X |",cube[6][7],cube[6][8],cube[6][9]);
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
 
@@ -248,29 +248,50 @@ bool execute(uint32_t number)
             else pointer--;
             break;
         case incV:
-            (cube[3][(uint32_t)pointer])++;
+            if((cube[3][(uint32_t)pointer])>=MAXNUMBER) (cube[3][(uint32_t)pointer])=0;
+            else (cube[3][(uint32_t)pointer])++;
             break;
         case decV:
-            (cube[3][(uint32_t)pointer])--;
+            if((cube[3][(uint32_t)pointer])<1) (cube[3][(uint32_t)pointer])=MAXNUMBER;
+            else (cube[3][(uint32_t)pointer])--;
             break;
         case oput:
-            printf("%i",(uint32_t)cube[3][(uint32_t)pointer]);
+            printf("%X",(uint32_t)cube[3][(uint32_t)pointer]);
             break;
         case iput:
-            scanf("%i",(uint32_t*)(&cube[3][(uint32_t)pointer]));
+            printf("input:");
+            scanf("%X",(uint32_t*)(&cube[3][(uint32_t)pointer]));
             break;
         case JmpF:
+
+            if(!cube[3][(uint32_t)pointer])
+            {
+#ifdef DEBUG_M
+                printf("JmpF from %i to %i",c_p,program[c_p][1]);
+#endif // DEBUG
+            }
+            c_p=program[c_p][1];
             break;
         case JmpB:
+
+            if(cube[3][(uint32_t)pointer])
+            {
+#ifdef DEBUG_M
+                printf("JmpB from %i to %i",c_p,program[c_p][1]);
+#endif // DEBUG
+                c_p=program[c_p][1];
+            }
             break;
         default:
+            return false;
             break;
 
         }
+        c_p++;
 
 
 
 
     }
-return true;
+    return true;
 }
