@@ -125,10 +125,11 @@ bool compile(char *text)
             negflag=0;
             break;
         case '[':
-            program[c++][0]=JmpF;
+            program[c][0]=JmpF;
             negflag=0;
             if(stackp==SIZE_STACK-1) return false;
             stack[stackp++] = c;
+            c++;
             break;
         case ']':
             program[c][0]=JmpB;
@@ -262,6 +263,7 @@ bool execute(uint32_t number)
             printf("input:");
             scanf("%X",(uint32_t*)(&cube[3][(uint32_t)pointer]));
             break;
+
         case JmpF:
 
             if(!cube[3][(uint32_t)pointer])
@@ -269,9 +271,11 @@ bool execute(uint32_t number)
 #ifdef DEBUG_M
                 printf("JmpF from %i to %i",c_p,program[c_p][1]);
 #endif // DEBUG
-            }
             c_p=program[c_p][1];
+            }
+
             break;
+
         case JmpB:
 
             if(cube[3][(uint32_t)pointer])

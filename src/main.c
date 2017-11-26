@@ -57,8 +57,8 @@ int main()
      }
      */
 
-    if(true==compile("++>>[-]<<[->>+<<]")) printf("Compilation success\n");
-    for(int i=1; i<=30; i++)
+    if(true==compile(",>>[-]<<[->>+<<]")) printf("Compilation success\n");
+    for(int i=1; i<=100; i++)
     {
         if(true==execute(1)) printf("\n Execution success\n");
         displayCube();
