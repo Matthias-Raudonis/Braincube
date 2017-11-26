@@ -32,9 +32,12 @@ SOFTWARE.
 
 extern uint8_t cube[6][9];
 extern uint8_t pointer;
-
+extern uint32_t program[SIZE_PROG][2];
+extern uint32_t stack[SIZE_STACK];
+extern uint32_t stackp;
 enum
 {
+    null=0,
     incP,
     decP,
     incV,
@@ -60,7 +63,7 @@ enum
     JmpB,
 };
 
-bool compile(uint8_t *program, char *text)
+bool compile(char *text)
 {
     uint32_t c=0;    // instruction counter
     bool negflag = false;
@@ -69,66 +72,81 @@ bool compile(uint8_t *program, char *text)
         switch(*text)
         {
         case '+':
-            program[c++]=incV;
+            program[c++][0]=incV;
             negflag=0;
             break;
         case '-':
-            program[c++]=decV;
+            program[c++][0]=decV;
             negflag=0;
             break;
         case '>':
-            program[c++]=incP;
+            program[c++][0]=incP;
             negflag=0;
             break;
         case '<':
-            program[c++]=decP;
+            program[c++][0]=decP;
             negflag=0;
             break;
         case '.':
-            program[c++]=oput;
+            program[c++][0]=oput;
             negflag=0;
             break;
         case ',':
-            program[c++]=iput;
+            program[c++][0]=iput;
             negflag=0;
             break;
         case '|':
             negflag=1;
             break;
         case 'F':
-            program[c++]=L_Front+negflag;
+            program[c++][0]=L_Front+negflag;
             negflag=0;
             break;
         case 'B':
-            program[c++]=L_Back+negflag;
+            program[c++][0]=L_Back+negflag;
             negflag=0;
             break;
         case 'U':
-            program[c++]=L_Up+negflag;
+            program[c++][0]=L_Up+negflag;
             negflag=0;
             break;
         case 'D':
-            program[c++]=L_Down+negflag;
+            program[c++][0]=L_Down+negflag;
             negflag=0;
             break;
         case 'R':
-            program[c++]=L_Right+negflag;
+            program[c++][0]=L_Right+negflag;
             negflag=0;
             break;
         case 'L':
-            program[c++]=L_Left+negflag;
+            program[c++][0]=L_Left+negflag;
             negflag=0;
             break;
-
-
-
-        default:
+        case '[':
+            program[c++][0]=JmpF;
+            negflag=0;
+            if(stackp==SIZE_STACK-1) return false;
+            stack[stackp++] = c;
             break;
+        case ']':
+            program[c][0]=JmpB;
+            negflag=0;
+            if(stackp==0) return false;
+
+            program[c][1]=stack[--stackp];
+            program[stack[stackp]][1]= c;
+                    c++;
+                    break;
+
+
+                    default:
+                    break;
 
 
         }
-        *(text++);
+        (text++);
     }
+    return true;
 }
 
 

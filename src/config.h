@@ -32,7 +32,8 @@ SOFTWARE.
 #define SIMULATOR // If not defined, only IO
 #define ALL_STEPS // Shows all steps
 
-
+#define SIZE_PROG 1024
+#define SIZE_STACK 512
 
 
 #define uint8_t char

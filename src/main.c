@@ -33,9 +33,13 @@ SOFTWARE.
 
 uint8_t cube[6][9];
 uint8_t pointer;
-
+uint8_t program[SIZE_PROG];
+uint8_t stack[SIZE_STACK];
+uint8_t stackp;
 int main()
 {
+    uint8_t stackp=0;
+
     printf("Braincube\n");
     for(int i=1; i<=6; i++)
     {
@@ -44,6 +48,8 @@ int main()
             cube[i][j]=j;
         }
     }
+
+    compile("+++;--    |-F|BB<>");
 
     displayCube();
     return 0;
