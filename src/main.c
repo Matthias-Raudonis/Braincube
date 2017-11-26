@@ -44,6 +44,7 @@ int main()
     stackp=0;
     c=0;
     c_p=0;
+    pointer=1;
 
     printf("Braincube\n");
     for(int i=1; i<=6; i++)
@@ -54,8 +55,8 @@ int main()
         }
     }
 
-    if(true==compile("+++;--    |-F|BB<>")) printf("compilation success\n");
-
+    if(true==compile("+.+.+.>+.,.<.")) printf("compilation success\n");
+    if(true==execute(1000)) printf("execution success\n");
     displayCube();
     return 0;
 }

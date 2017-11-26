@@ -47,7 +47,6 @@ enum
     decV,
     oput,
     iput,
-    negL,
 
     L_Front,    // mixing N and L necessary because of +1
     N_Front,
@@ -238,16 +237,40 @@ bool execute(uint32_t number)
 
     while(number--&&c>=c_p)
     {
-        switch[program[c_p]
-    {
-
+        switch(program[c_p][0])
+        {
         case incP:
+            if(pointer>=9) pointer=1;
+            else pointer++;
+            break;
+        case decP:
+            if(pointer<=1) pointer=9;
+            else pointer--;
+            break;
+        case incV:
+            (cube[3][(uint32_t)pointer])++;
+            break;
+        case decV:
+            (cube[3][(uint32_t)pointer])--;
+            break;
+        case oput:
+            printf("%i",(uint32_t)cube[3][(uint32_t)pointer]);
+            break;
+        case iput:
+            scanf("%i",(uint32_t*)(&cube[3][(uint32_t)pointer]));
+            break;
+        case JmpF:
+            break;
+        case JmpB:
+            break;
+        default:
+            break;
+
+        }
+
+
+
 
     }
-
-
-
-
-}
-
+return true;
 }

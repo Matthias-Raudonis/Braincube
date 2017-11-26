@@ -36,9 +36,9 @@ SOFTWARE.
 #define SIZE_STACK 512
 
 
-#define uint8_t char
-#define uint32_t int
-#define bool char
+#define uint8_t unsigned short
+#define uint32_t unsigned int
+#define bool unsigned short
 
 #define true 1
 #define false 0
