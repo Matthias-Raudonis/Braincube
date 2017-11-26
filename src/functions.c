@@ -32,6 +32,9 @@ SOFTWARE.
 
 extern uint8_t cube[6][9];
 extern uint8_t pointer;
+
+extern uint32_t c;    // instruction counter
+extern uint32_t c_p;    // instruction pointer
 extern uint32_t program[SIZE_PROG][2];
 extern uint32_t stack[SIZE_STACK];
 extern uint32_t stackp;
@@ -65,7 +68,7 @@ enum
 
 bool compile(char *text)
 {
-    uint32_t c=0;    // instruction counter
+
     bool negflag = false;
     while(*text)
     {
@@ -135,23 +138,24 @@ bool compile(char *text)
 
             program[c][1]=stack[--stackp];
             program[stack[stackp]][1]= c;
-                    c++;
-                    break;
+            c++;
+            break;
 
 
-                    default:
-                    break;
-
+        default:
+            break;
 
         }
         (text++);
     }
+    if(!stackp) return false;
     return true;
 }
 
 
 void displayCube()
 {
+
 // surface:
 // 123
 // 456
@@ -226,4 +230,24 @@ void displayCube()
     buf+=sprintf(buf,"        x - - - x");
     buf+=sprintf(buf,"\n");
     printf("%s",buffer);
+}
+
+
+bool execute(uint32_t number)
+{
+
+    while(number--&&c>=c_p)
+    {
+        switch[program[c_p]
+    {
+
+        case incP:
+
+    }
+
+
+
+
+}
+
 }

@@ -30,7 +30,7 @@ SOFTWARE.
 #define FUNCTIONS_H
 
 void displayCube();
-uint8_t compile(char *text);
-
+bool compile(char *text);
+bool execute(uint32_t number);
 
 #endif
