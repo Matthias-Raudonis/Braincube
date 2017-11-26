@@ -235,6 +235,7 @@ void displayCube()
 
 bool execute(uint32_t number)
 {
+    uint8_t H;
 
     while(number--&&c>=c_p)
     {
@@ -288,6 +289,35 @@ bool execute(uint32_t number)
             break;
 
         case L_Front:
+            if(!program[c_p][1])    // if positive
+            {
+                H=cube[3][1];
+                  cube[3][1]=cube[3][7];
+                cube[3][7]=cube[3][9];
+                cube[3][9]=cube[3][3];
+                cube[3][3]=H;
+                //cube[3][5]=cube[3][5];
+                H=cube[3][2];
+                cube[3][2]=cube[3][4];
+                cube[3][4]=cube[3][8];
+                cube[3][8]=cube[3][6];
+                cube[3][6]=H;
+
+
+
+            }
+            else
+            {
+                cube[3][1]=cube[3][3];
+                cube[3][2]=cube[3][6];
+                cube[3][3]=cube[3][9];
+                cube[3][4]=cube[3][2];
+                //cube[3][5]=cube[3][5];
+                cube[3][6]=cube[3][8];
+                cube[3][7]=cube[3][1];
+                cube[3][8]=cube[3][4];
+                cube[3][9]=cube[3][7];
+            }
             break;
         case L_Back:
             break;
@@ -303,11 +333,6 @@ bool execute(uint32_t number)
         default:
             return false;
             break;
-
-
-
-
-
         }
         c_p++;
     }
