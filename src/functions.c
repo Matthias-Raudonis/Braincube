@@ -48,18 +48,12 @@ enum
     oput,
     iput,
 
-    L_Front,    // mixing N and L necessary because of +1
-    N_Front,
+    L_Front,
     L_Back,
-    N_Back,
     L_Up,
-    N_Up,
     L_Down,
-    N_Down,
     L_Right,
-    N_Right,
     L_Left,
-    N_Left,
 
     JmpF,
     JmpB,
@@ -101,27 +95,33 @@ bool compile(char *text)
             negflag=1;
             break;
         case 'F':
-            program[c++][0]=L_Front+negflag;
+            program[c++][0]=L_Front;
+            program[c++][1]= negflag;
             negflag=0;
             break;
         case 'B':
-            program[c++][0]=L_Back+negflag;
+            program[c++][0]=L_Back;
+            program[c++][1]= negflag;
             negflag=0;
             break;
         case 'U':
-            program[c++][0]=L_Up+negflag;
+            program[c++][0]=L_Up;
+            program[c++][1]= negflag;
             negflag=0;
             break;
         case 'D':
-            program[c++][0]=L_Down+negflag;
+            program[c++][0]=L_Down;
+            program[c++][1]= negflag;
             negflag=0;
             break;
         case 'R':
-            program[c++][0]=L_Right+negflag;
+            program[c++][0]=L_Right;
+            program[c++][1]= negflag;
             negflag=0;
             break;
         case 'L':
-            program[c++][0]=L_Left+negflag;
+            program[c++][0]=L_Left;
+            program[c++][1]= negflag;
             negflag=0;
             break;
         case '[':
@@ -271,7 +271,7 @@ bool execute(uint32_t number)
 #ifdef DEBUG_M
                 printf("JmpF from %i to %i",c_p,program[c_p][1]);
 #endif // DEBUG
-            c_p=program[c_p][1];
+                c_p=program[c_p][1];
             }
 
             break;
@@ -286,16 +286,30 @@ bool execute(uint32_t number)
                 c_p=program[c_p][1];
             }
             break;
+
+        case L_Front:
+            break;
+        case L_Back:
+            break;
+        case L_Up:
+            break;
+        case L_Down:
+            break;
+        case L_Right:
+            break;
+        case L_Left:
+            break;
+
         default:
             return false;
             break;
 
+
+
+
+
         }
         c_p++;
-
-
-
-
     }
     return true;
 }
