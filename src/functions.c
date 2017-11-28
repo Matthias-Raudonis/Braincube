@@ -342,8 +342,24 @@ void turn_face(uint8_t face, uint8_t times)
     switch(face)
     {
     case 1:
+        Turn_ins[0].nr=5;
+        Turn_ins[0].side=As_up;
+        Turn_ins[1].nr=4;
+        Turn_ins[1].side=As_up;
+        Turn_ins[2].nr=3;
+        Turn_ins[2].side=As_up;
+        Turn_ins[3].nr=2;
+        Turn_ins[3].side=As_up;
         break;
     case 2:
+        Turn_ins[0].nr=5;
+        Turn_ins[0].side=As_right;
+        Turn_ins[1].nr=1;
+        Turn_ins[1].side=As_left;
+        Turn_ins[2].nr=3;
+        Turn_ins[2].side=As_left;
+        Turn_ins[3].nr=6;
+        Turn_ins[3].side=As_left;
         break;
     case 3:
         Turn_ins[0].nr=1;
@@ -356,13 +372,35 @@ void turn_face(uint8_t face, uint8_t times)
         Turn_ins[3].side=As_right;
         break;
     case 4:
+        Turn_ins[0].nr=6;
+        Turn_ins[0].side=As_right;
+        Turn_ins[1].nr=3;
+        Turn_ins[1].side=As_right;
+        Turn_ins[2].nr=1;
+        Turn_ins[2].side=As_right;
+        Turn_ins[3].nr=5;
+        Turn_ins[3].side=As_left;
         break;
     case 5:
+        Turn_ins[0].nr=2;
+        Turn_ins[0].side=As_left;
+        Turn_ins[1].nr=6;
+        Turn_ins[1].side=As_down;
+        Turn_ins[2].nr=4;
+        Turn_ins[2].side=As_right;
+        Turn_ins[3].nr=1;
+        Turn_ins[3].side=As_up;
         break;
     case 6:
+        Turn_ins[0].nr=2;
+        Turn_ins[0].side=As_down;
+        Turn_ins[1].nr=3;
+        Turn_ins[1].side=As_down;
+        Turn_ins[2].nr=4;
+        Turn_ins[2].side=As_down;
+        Turn_ins[3].nr=5;
+        Turn_ins[3].side=As_down;
         break;
-
-
     }
     for(int i=0; i<times; i++)
     {
@@ -380,13 +418,14 @@ void turn_face(uint8_t face, uint8_t times)
         cube[face][6]=H;
 
         // turning round
-        uint8_t Hlp[3]={0,0,0};
-        uint8_t Wrt[3]={0,0,0};
+        uint8_t Hlp[3]= {0,0,0};
+        uint8_t Wrt[3]= {0,0,0};
 
         change3(Turn_ins[0].side,Turn_ins[0].nr,Wrt,Hlp);   // save 0 to Hlp
-        for(int j=1; j<4; j++){
-        memcpy(Wrt,Hlp,3*sizeof(uint8_t));
-        change3(Turn_ins[j].side,Turn_ins[j].nr,Wrt,Hlp);
+        for(int j=1; j<4; j++)
+        {
+            memcpy(Wrt,Hlp,3*sizeof(uint8_t));
+            change3(Turn_ins[j].side,Turn_ins[j].nr,Wrt,Hlp);
         }
         change3(Turn_ins[0].side,Turn_ins[0].nr,Hlp,Wrt);   //last copy: doesn't matter
     }
