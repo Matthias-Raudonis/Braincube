@@ -27,8 +27,16 @@ SOFTWARE.
 
 */
 #include <stdio.h>
+#include <string.h>
+
 #include "config.h"
 #include "functions.h"
+
+#define As_right 1
+#define As_left 2
+#define As_up 3
+#define As_down 4
+
 
 extern uint8_t cube[7][9];
 extern uint8_t pointer;
@@ -38,6 +46,13 @@ extern uint32_t c_p;    // instruction pointer
 extern uint32_t program[SIZE_PROG][2];
 extern uint32_t stack[SIZE_STACK];
 extern uint32_t stackp;
+
+struct turnins
+{
+    uint8_t nr;
+    uint8_t side;
+};
+
 enum
 {
     null=0,
@@ -322,10 +337,8 @@ bool execute(uint32_t number)
 void turn_face(uint8_t face, uint8_t times)
 {
     uint8_t H;  // help variable for buffering
-    uint8_t Ad=0; // Adjacent face (left side changes)
-    uint8_t Al=0;
-    uint8_t Au=0;
-    uint8_t Ar=0;
+    struct turnins Turn_ins[4];    // turn instructions; CW
+
     switch(face)
     {
     case 1:
@@ -333,10 +346,14 @@ void turn_face(uint8_t face, uint8_t times)
     case 2:
         break;
     case 3:
-        Ad=1;
-        Al=4;
-        Au=6;
-        Ar=2;
+        Turn_ins[0].nr=1;
+        Turn_ins[0].side=As_down;
+        Turn_ins[1].nr=4;
+        Turn_ins[1].side=As_left;
+        Turn_ins[2].nr=6;
+        Turn_ins[2].side=As_up;
+        Turn_ins[3].nr=2;
+        Turn_ins[3].side=As_right;
         break;
     case 4:
         break;
@@ -361,30 +378,20 @@ void turn_face(uint8_t face, uint8_t times)
         cube[face][4]=cube[face][8];
         cube[face][8]=cube[face][6];
         cube[face][6]=H;
+
         // turning round
-        uint8_t H[3];
-        uint8_t W[3];
-        uint8_t H1=cube[Ad][7];
-        uint8_t H2=cube[Ad][8];
-        uint8_t H3=cube[Ad][9];
-        cube[Ad][7]=cube[Ar][9];
-        cube[Ad][8]=cube[Ar][6];
-        cube[Ad][9]=cube[Ar][3];
-        cube[Ar][9]=cube[Au][3];
-        cube[Ar][6]=cube[Au][2];
-        cube[Ar][3]=cube[Au][1];
-        cube[Au][1]=cube[Al][7];
-        cube[Au][2]=cube[Al][4];
-        cube[Au][3]=cube[Al][1];
-        cube[Al][7]=H3;
-        cube[Al][4]=H2;
-        cube[Al][1]=H1;
+        uint8_t Hlp[3]={0,0,0};
+        uint8_t Wrt[3]={0,0,0};
+
+        change3(Turn_ins[0].side,Turn_ins[0].nr,Wrt,Hlp);   // save 0 to Hlp
+        for(int j=1; j<4; j++){
+        memcpy(Wrt,Hlp,3*sizeof(uint8_t));
+        change3(Turn_ins[j].side,Turn_ins[j].nr,Wrt,Hlp);
+        }
+        change3(Turn_ins[0].side,Turn_ins[0].nr,Hlp,Wrt);   //last copy: doesn't matter
     }
 }
-#define As_right 1
-#define As_left 2
-#define As_up 3
-#define As_down 4
+
 void change3(uint8_t sideid, uint8_t cubenr, uint8_t* write, uint8_t* read)  // side nrs indicated clockwise
 {
     switch (sideid)

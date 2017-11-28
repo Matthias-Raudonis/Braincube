@@ -33,4 +33,5 @@ void displayCube();
 bool compile(char *text);
 bool execute(uint32_t number);
 void turn_face(uint8_t face, uint8_t times);
+void change3(uint8_t sideid, uint8_t cubenr, uint8_t* write, uint8_t* read);
 #endif
