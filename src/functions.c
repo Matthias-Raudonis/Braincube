@@ -347,34 +347,82 @@ void turn_face(uint8_t face, uint8_t times)
 
 
     }
-for(int i=0; i<times; i++){
+    for(int i=0; i<times; i++)
+    {
         //turning actual face
-    H=cube[face][1];
-    cube[face][1]=cube[face][7];
-    cube[face][7]=cube[face][9];
-    cube[face][9]=cube[face][3];
-    cube[face][3]=H;
-    //cube[3][5]=cube[3][5];
-    H=cube[face][2];
-    cube[face][2]=cube[face][4];
-    cube[face][4]=cube[face][8];
-    cube[face][8]=cube[face][6];
-    cube[face][6]=H;
-    // turning round
-    uint8_t H1=cube[Ad][7];
-    uint8_t H2=cube[Ad][8];
-    uint8_t H3=cube[Ad][9];
-    cube[Ad][7]=cube[Ar][9];
-    cube[Ad][8]=cube[Ar][6];
-    cube[Ad][9]=cube[Ar][3];
-    cube[Ar][9]=cube[Au][3];
-    cube[Ar][6]=cube[Au][2];
-    cube[Ar][3]=cube[Au][1];
-    cube[Au][1]=cube[Al][7];
-    cube[Au][2]=cube[Al][4];
-    cube[Au][3]=cube[Al][1];
-    cube[Al][7]=H3;
-    cube[Al][4]=H2;
-    cube[Al][1]=H1;
+        H=cube[face][1];
+        cube[face][1]=cube[face][7];
+        cube[face][7]=cube[face][9];
+        cube[face][9]=cube[face][3];
+        cube[face][3]=H;
+        //cube[3][5]=cube[3][5];
+        H=cube[face][2];
+        cube[face][2]=cube[face][4];
+        cube[face][4]=cube[face][8];
+        cube[face][8]=cube[face][6];
+        cube[face][6]=H;
+        // turning round
+        uint8_t H[3];
+        uint8_t W[3];
+        uint8_t H1=cube[Ad][7];
+        uint8_t H2=cube[Ad][8];
+        uint8_t H3=cube[Ad][9];
+        cube[Ad][7]=cube[Ar][9];
+        cube[Ad][8]=cube[Ar][6];
+        cube[Ad][9]=cube[Ar][3];
+        cube[Ar][9]=cube[Au][3];
+        cube[Ar][6]=cube[Au][2];
+        cube[Ar][3]=cube[Au][1];
+        cube[Au][1]=cube[Al][7];
+        cube[Au][2]=cube[Al][4];
+        cube[Au][3]=cube[Al][1];
+        cube[Al][7]=H3;
+        cube[Al][4]=H2;
+        cube[Al][1]=H1;
+    }
+}
+#define As_right 1
+#define As_left 2
+#define As_up 3
+#define As_down 4
+void change3(uint8_t sideid, uint8_t cubenr, uint8_t* write, uint8_t* read)  // side nrs indicated clockwise
+{
+    switch (sideid)
+    {
+
+    case As_right:
+        read[0]=cube[cubenr][3];
+        read[1]=cube[cubenr][6];
+        read[2]=cube[cubenr][9];
+        cube[cubenr][3]=write[0];
+        cube[cubenr][6]=write[1];
+        cube[cubenr][9]=write[2];
+        break;
+    case As_left:
+        read[0]=cube[cubenr][7];
+        read[1]=cube[cubenr][4];
+        read[2]=cube[cubenr][1];
+        cube[cubenr][7]=write[0];
+        cube[cubenr][4]=write[1];
+        cube[cubenr][1]=write[2];
+        break;
+    case As_up:
+        read[0]=cube[cubenr][1];
+        read[1]=cube[cubenr][2];
+        read[2]=cube[cubenr][3];
+        cube[cubenr][1]=write[0];
+        cube[cubenr][2]=write[1];
+        cube[cubenr][3]=write[2];
+        break;
+    case As_down:
+        read[0]=cube[cubenr][9];
+        read[1]=cube[cubenr][8];
+        read[2]=cube[cubenr][7];
+        cube[cubenr][9]=write[0];
+        cube[cubenr][8]=write[1];
+        cube[cubenr][7]=write[2];
+        break;
+    default:
+        break;
     }
 }
