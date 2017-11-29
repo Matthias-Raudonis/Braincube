@@ -110,32 +110,32 @@ bool compile(char *text)
             negflag=1;
             break;
         case 'F':
-            program[c++][0]=L_Front;
+            program[c][0]=L_Front;
             program[c++][1]= negflag;
             negflag=0;
             break;
         case 'B':
-            program[c++][0]=L_Back;
+            program[c][0]=L_Back;
             program[c++][1]= negflag;
             negflag=0;
             break;
         case 'U':
-            program[c++][0]=L_Up;
+            program[c][0]=L_Up;
             program[c++][1]= negflag;
             negflag=0;
             break;
         case 'D':
-            program[c++][0]=L_Down;
+            program[c][0]=L_Down;
             program[c++][1]= negflag;
             negflag=0;
             break;
         case 'R':
-            program[c++][0]=L_Right;
+            program[c][0]=L_Right;
             program[c++][1]= negflag;
             negflag=0;
             break;
         case 'L':
-            program[c++][0]=L_Left;
+            program[c][0]=L_Left;
             program[c++][1]= negflag;
             negflag=0;
             break;
@@ -250,8 +250,6 @@ void displayCube()
 
 bool execute(uint32_t number)
 {
-
-
     while(number--&&c>=c_p)
     {
         switch(program[c_p][0])
@@ -315,14 +313,59 @@ bool execute(uint32_t number)
             }
             break;
         case L_Back:
+            if(!program[c_p][1])    // if positive
+            {
+                turn_face(6,1);
+            }
+            else
+            {
+
+                turn_face(6,3);
+            }
             break;
         case L_Up:
+            if(!program[c_p][1])    // if positive
+            {
+                turn_face(1,1);
+            }
+            else
+            {
+
+                turn_face(1,3);
+            }
             break;
         case L_Down:
+            if(!program[c_p][1])    // if positive
+            {
+                turn_face(6,1);
+            }
+            else
+            {
+
+                turn_face(6,3);
+            }
             break;
         case L_Right:
+            if(!program[c_p][1])    // if positive
+            {
+                turn_face(4,1);
+            }
+            else
+            {
+
+                turn_face(4,3);
+            }
             break;
         case L_Left:
+            if(!program[c_p][1])    // if positive
+            {
+                turn_face(2,1);
+            }
+            else
+            {
+
+                turn_face(2,3);
+            }
             break;
 
         default:
