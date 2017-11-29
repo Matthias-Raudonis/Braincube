@@ -49,19 +49,24 @@ int main()
     printf("Braincube\n");
 
     for(int i=1; i<=6; i++)
-     {
-         for(int j=1; j<=9; j++)
-         {
-             cube[i][j]=j;
-         }
-     }
+    {
+        for(int j=1; j<=9; j++)
+        {
+            cube[i][j]=i;
+        }
+    }
 
 
-    if(true==compile(".F|F")) printf("Compilation success\n");
-    for(int i=0; i<5; i++)
+    if(true==compile("|F|R|U|B|L|D")) printf("Compilation success\n");
+    displayCube();
+    if(true==execute(100)) printf("\n Execution success\n");
+    displayCube();
+
+
+    /*for(int i=0; i<5; i++)
     {
         if(true==execute(1)) printf("\n Execution success\n");
         displayCube();
-    }
+    }*/
     return 0;
 }

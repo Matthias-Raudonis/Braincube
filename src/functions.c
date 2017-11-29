@@ -315,12 +315,12 @@ bool execute(uint32_t number)
         case L_Back:
             if(!program[c_p][1])    // if positive
             {
-                turn_face(6,1);
+                turn_face(5,1);
             }
             else
             {
 
-                turn_face(6,3);
+                turn_face(5,3);
             }
             break;
         case L_Up:
