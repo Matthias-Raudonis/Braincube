@@ -1,5 +1,5 @@
 # Braincube project
-now in v *0.2*
+now in v _0.2_
 
 <img width="800" alt="0_2_123" src="https://user-images.githubusercontent.com/33962683/33967271-0c2ba384-e063-11e7-8f3e-ba739ec8b4fd.PNG">
 
@@ -28,7 +28,7 @@ Use the Braincube file as a cmd argument
 - [	if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
 - ]	if the byte at the data pointer is nonzero jump it back to the command after the matching [ command.
 
-#### Rubics cube instructions
+#### Cube instructions
 Turn 90° clockwise: 
 - F (front): the face facing the solver.
 - B (back): the back face.
@@ -41,9 +41,18 @@ Turn 90° clockwise:
 #### Cube faces
 <img width="800" alt="sides" src="https://user-images.githubusercontent.com/33962683/33967273-0c623386-e063-11e7-8a9d-a0a2ff003ea4.PNG">
 
+The Braincube consists of 6 faces. _Face 3_ is the front face and the only face directly accessible by the pointer.
+Front face pointer increment numbers:
+
+```
+| 1 | 2 | 3 |
+| 4 | 5 | 6 |
+| 7 | 8 | 9 |
+```
+
 ## Examples
 
-### 4x123 filling example
+### 8x123 filling example
 `>>>>++++
 [-<<<<+.>++.>+++.>>>>+>++>+++<<<< UD ]
 `
@@ -52,4 +61,9 @@ Turn 90° clockwise:
 
 <img width="800" alt="0_2_123" src="https://user-images.githubusercontent.com/33962683/33967271-0c2ba384-e063-11e7-8f3e-ba739ec8b4fd.PNG">
 
+## Differences from the Brainfuck language
+- 9 fields accessible by pointer
+- Cube instructions
+- Values range from 0-15 (F)
+- Hexadecimal output (not Ascii)
 ## ToDo
