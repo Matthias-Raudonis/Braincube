@@ -31,7 +31,7 @@ SOFTWARE.
 
 #define SIMULATOR // If not defined, only IO
 #define ALL_STEPS // Shows all steps
-#define DEBUG_M
+//#define DEBUG_M
 
 #define SIZE_PROG 1024
 #define SIZE_STACK 512
