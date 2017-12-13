@@ -46,39 +46,27 @@ int main(int argc, const char * argv[])
     c_p=0;
     pointer=1;
     uint32_t count=0;
-    uint8_t input[SIZE_PROG];
+    char input[SIZE_PROG];
 
+    printf("Braincube Interpreter v. 0.2\n");
 
-    printf("Braincube Interpreter v. 0.1\n");
-    printf("%s\n",argv[1]);
-    if (argc >= 1 || (fp = fopen(argv[1], "r")) == NULL)
+    if (argc > 2 || (fp = fopen(argv[1], "r")) == NULL)
     {
         displayCube();
         printf("No input file");
         return 1;
     }
 
-    while ((input[count++] = getc(fp)) != EOF)
-
-        for(int i=1; i<=6; i++)
-        {
-            for(int j=1; j<=9; j++)
-            {
-                cube[i][j]=i;
-            }
-        }
-
+    while ((input[count++] = getc(fp)) != EOF) {;} // Read in input
+    fclose(fp);
 
     if(true==compile(input)) printf("Compilation success\n");
-    displayCube();
-    if(true==execute(100)) printf("\n Execution success\n");
+    printf("Output:\n");
+    if(true==execute(SIZE_PROG)) {;};//printf("\n Execution success\n"); // Execute all
+    printf("\n");
     displayCube();
 
 
-    /*for(int i=0; i<5; i++)
-    {
-        if(true==execute(1)) printf("\n Execution success\n");
-        displayCube();
-    }*/
+
     return 0;
 }
