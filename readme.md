@@ -1,12 +1,14 @@
-# Braincube project
+# Braincube - an esotheric programming language based on the rubics cube and BF
 now in v _0.2_
 
-<img width="800" alt="0_2_123" src="https://user-images.githubusercontent.com/33962683/33967271-0c2ba384-e063-11e7-8f3e-ba739ec8b4fd.PNG">
+## Example Output in console
 
-Usage Example Output
+<img width="800" alt="0_2_123" src="https://user-images.githubusercontent.com/33962683/33967271-0c2ba384-e063-11e7-8f3e-ba739ec8b4fd.PNG"> 
+
+
 
 ## Features
-
+One can play with arrays and larn how to use pointers and improve logical thinking, especially in 3D space.
 ## Usage
 
 ### Command Line
@@ -14,8 +16,10 @@ Usage Example Output
 Use the Braincube file as a cmd argument
 
 `$ ./Braincube.exe ../examples/8x123.bc`
+
 ### Cube display without input
 <img width="800" alt="0_2_no_input" src="https://user-images.githubusercontent.com/33962683/33967272-0c47d518-e063-11e7-94c2-4753242dbc08.PNG">
+
 ### Instruction Set
 
 ##### Pointer instructions
@@ -67,3 +71,4 @@ Front face pointer increment numbers:
 - Values range from 0-15 (F)
 - Hexadecimal output (not Ascii)
 ## ToDo
+nothing yet
